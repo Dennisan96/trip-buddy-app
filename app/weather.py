@@ -1,9 +1,10 @@
 import requests
 from flask import request, Blueprint
 import logging
+import os
 
 CURRNET_WEATHER_API_URL = "http://api.weatherapi.com/v1/current.json"
-WEATHER_API_KEY="xxx"
+WEATHER_API_KEY = os.environ['WEATHER_API_KEY']
 
 logger = logging.getLogger(__name__)
 
