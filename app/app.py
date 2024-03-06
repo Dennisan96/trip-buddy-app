@@ -18,3 +18,7 @@ def hello_world():
         "v": "hello",
     }
     return jsonify(data), 200
+
+@app.route('/privacy')
+def privacy():
+    return "The APP does not collect any user data", 200
