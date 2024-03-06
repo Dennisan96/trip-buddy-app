@@ -10,7 +10,7 @@ WEATHER_API_KEY = os.environ['WEATHER_API_KEY']
 
 logger = logging.getLogger(__name__)
 
-weather_blueprint= Blueprint('weather', __name__)
+weather_blueprint = Blueprint('weather', __name__)
 
 @weather_blueprint.route('/current')
 def get_current_weather():
@@ -36,8 +36,11 @@ def get_forecast_weather():
     location = request.args.get('location')
     days_ahead = request.args.get('days')
 
-    if int(days_ahead) > MAX_FORECAST_DAY:
-        return {"error": f"Cannot forecast more than {MAX_FORECAST_DAY} ahead"}, 400
+    if location is None:
+        return {"error": "location cannot be None"}, 400
+
+    if days_ahead is None or int(days_ahead) > MAX_FORECAST_DAY:
+        return {"error": f"No days ahead provided or requested forecast more than {MAX_FORECAST_DAY} ahead"}, 400
     
     logger.info(f"Getting forecast weather for {location} with {days_ahead}")
 

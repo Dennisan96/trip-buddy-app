@@ -418,3 +418,26 @@ paths:
                         type: string
                       tz_id:
                         type: string
+  /place/find:
+    get:
+      summary: Find a place
+      description: Fetches a place's Google Map URL based on the provided location text
+      operationId: findPlaceOnGoogleMap
+      parameters:
+        - name: location
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The location text to query for Google Map URL
+      responses:
+        '200':
+          description: Successful response with place details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  place_url:
+                    type: string
+                    example: "https://www.google.com/maps/place/?q=place_id:/?q=place_id:ChIJy0PC1XVyAHwRiEVSNmZ9_Qs"
