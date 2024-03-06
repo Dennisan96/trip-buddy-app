@@ -1,0 +1,155 @@
+openapi: 3.0.0
+info:
+  title: Travel Buddy Weather API
+  version: 1.0.0
+  description: API to fetch weather information for a given location.
+servers:
+  - url: https://travelbuddy.seaotterai.com/
+paths:
+  /weather/current:
+    get:
+      summary: Get current weather information for a specified location.
+      operationId: getCurrentWeather
+      parameters:
+        - in: query
+          name: location
+          required: true
+          schema:
+            type: string
+          description: The location name to fetch weather data for, e.g., "Seattle".
+      responses:
+        "200":
+          description: Successful response with current weather and location details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  current:
+                    type: object
+                    properties:
+                      cloud:
+                        type: integer
+                        example: 75
+                      condition:
+                        type: object
+                        properties:
+                          code:
+                            type: integer
+                            example: 1003
+                          icon:
+                            type: string
+                            example: //cdn.weatherapi.com/weather/64x64/day/116.png
+                          text:
+                            type: string
+                            example: Partly cloudy
+                      feelslike_c:
+                        type: number
+                        format: float
+                        example: 5.3
+                      feelslike_f:
+                        type: number
+                        format: float
+                        example: 41.6
+                      gust_kph:
+                        type: number
+                        format: float
+                        example: 12.2
+                      gust_mph:
+                        type: number
+                        format: float
+                        example: 7.6
+                      humidity:
+                        type: integer
+                        example: 56
+                      is_day:
+                        type: integer
+                        example: 1
+                      last_updated:
+                        type: string
+                        example: 2024-02-26 15:00
+                      last_updated_epoch:
+                        type: integer
+                        example: 1708988400
+                      precip_in:
+                        type: number
+                        format: float
+                        example: 0.02
+                      precip_mm:
+                        type: number
+                        format: float
+                        example: 0.63
+                      pressure_in:
+                        type: number
+                        format: float
+                        example: 29.84
+                      pressure_mb:
+                        type: number
+                        format: float
+                        example: 1011
+                      temp_c:
+                        type: number
+                        format: float
+                        example: 7.2
+                      temp_f:
+                        type: number
+                        format: float
+                        example: 45
+                      uv:
+                        type: number
+                        format: float
+                        example: 1
+                      vis_km:
+                        type: number
+                        format: float
+                        example: 16
+                      vis_miles:
+                        type: number
+                        format: float
+                        example: 9
+                      wind_degree:
+                        type: integer
+                        example: 250
+                      wind_dir:
+                        type: string
+                        example: WSW
+                      wind_kph:
+                        type: number
+                        format: float
+                        example: 9
+                      wind_mph:
+                        type: number
+                        format: float
+                        example: 5.6
+                  location:
+                    type: object
+                    properties:
+                      country:
+                        type: string
+                        example: United States of America
+                      lat:
+                        type: number
+                        format: float
+                        example: 47.61
+                      localtime:
+                        type: string
+                        example: 2024-02-26 15:07
+                      localtime_epoch:
+                        type: integer
+                        example: 1708988878
+                      lon:
+                        type: number
+                        format: float
+                        example: -122.33
+                      name:
+                        type: string
+                        example: Seattle
+                      region:
+                        type: string
+                        example: Washington
+                      tz_id:
+                        type: string
+                        example: America/Los_Angeles
+                required:
+                  - current
+                  - location

@@ -4,6 +4,8 @@ import logging
 import os
 
 CURRNET_WEATHER_API_URL = "http://api.weatherapi.com/v1/current.json"
+FORECAST_WEATHER_API_URL = "http://api.weatherapi.com/v1/forecast.json"
+MAX_FORECAST_DAY = 14
 WEATHER_API_KEY = os.environ['WEATHER_API_KEY']
 
 logger = logging.getLogger(__name__)
@@ -27,3 +29,30 @@ def get_current_weather():
     logger.error(response.json())
     
     return {"error": "Error fetching the data"}, response.status_code
+
+
+@weather_blueprint.route("/forecast")
+def get_forecast_weather():
+    location = request.args.get('location')
+    days_ahead = request.args.get('days')
+
+    if int(days_ahead) > MAX_FORECAST_DAY:
+        return {"error": f"Cannot forecast more than {MAX_FORECAST_DAY} ahead"}, 400
+    
+    logger.info(f"Getting forecast weather for {location} with {days_ahead}")
+
+    params = {
+        "key": WEATHER_API_KEY,
+        "q": location,
+        "days": days_ahead,
+    }
+
+    response = requests.get(FORECAST_WEATHER_API_URL, params=params)
+    if response.status_code == 200:
+        return response.json(), 200
+
+    logger.error(f"Error when calling get forecast weather API for {location}, code: {response.status_code}")
+    logger.error(response.json())
+    
+    return {"error": "Error fetching the data"}, response.status_code
+    
