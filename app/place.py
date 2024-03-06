@@ -36,7 +36,7 @@ def find_place():
             url = generate_place_url_from_place_id(place_id)
             return {"place_url": url}, 200
         else:
-            return {"error": f"Place not found {response_json}"}, 400
+            return {"error": "Place not found"}, 400
     else:
         return {"error": "Failed to connect to the Google Maps API"}, 500
 
