@@ -1,0 +1,5 @@
+High:
+* logger does not work on local 
+
+Low:
+* Able to get attractions from Google

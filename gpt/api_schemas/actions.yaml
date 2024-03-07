@@ -441,3 +441,67 @@ paths:
                   place_url:
                     type: string
                     example: "https://www.google.com/maps/place/?q=place_id:/?q=place_id:ChIJy0PC1XVyAHwRiEVSNmZ9_Qs"
+  /place/reviews:
+    get:
+      summary: Find the customer reviews of a place
+      description: Fetches a place's Google reviews on the provided location text
+      operationId: findPlaceGoogleReview
+      parameters:
+        - name: location
+          in: query
+          required: True 
+          schema:
+            type: string
+          description: The location text to query for Google Reviews
+      responses:
+        '200':
+          description: Success response with google reviews of the place
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rating:
+                    type: number 
+                    example: 4.5
+                  reviews:
+                    type: object
+                    properties:
+                      text:
+                        type: string
+                        example: I love this place
+                  user_rating_total:
+                    type: number
+                    example: 501
+  /place/compute-routes:
+    get:
+      summary: Find travel distance and duration between two places
+      description: Find the travel distance and how long it takes to travel between two places by driving
+      operationId: findDirection
+      parameters:
+        - name: origin
+          in: query
+          required: True 
+          schema:
+            type: string 
+          description: the origin location 
+        - name: destination
+          in: query 
+          required: True 
+          schema:
+            type: string 
+          description: the destination location
+      responses:
+        '200':
+          description: Success response with distance and duration of two places travel by call
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  distance:
+                    type: string
+                    example: 174 mile
+                  duration:
+                    type: string 
+                    example: 1 hour
