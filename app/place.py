@@ -7,7 +7,7 @@ GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
 
 # URLS
 FIND_PLACE_URL = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json"
-PLACE_URL_FROM_ID = "https://www.google.com/maps/place/?q=place_id:"
+PLACE_URL_FROM_ID = "https://www.google.com/maps/place"
 
 logger = logging.getLogger(__name__)
 place_bp = Blueprint('place', __name__)
